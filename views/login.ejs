@@ -1,0 +1,84 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+	
+	#login-container {
+      margin: 50px auto;
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      text-align: center;
+    }
+	
+
+    
+
+    input[type="email"],
+    input[type="password"],
+   button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box; /* Ensure padding is included in the width */
+    }
+
+    button {
+      background-color: #000;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+	 <%- include('dash') %>
+<div id="login-container">
+
+  <h2>Login</h2>
+  <form action="/categories" method="POST">
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+  </form>
+  
+  <p>Don't have an account? <a href="/">Signup</a></p>
+     <p > <%= message %></p> 
+<script>
+	if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+  </div>
+</body>
+</html>

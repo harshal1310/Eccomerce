@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .email {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .otp-input {
+      width: 40px;
+      height: 40px;
+      margin: 0 5px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .input-container {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+	 <%- include('dash') %>
+
+<h1>Enter OTP</h1>
+<p id = 'otp'>OTP sent to <%= message %> </p> 
+
+
+<div class="input-container">
+  <input class="otp-input" type="text" name="otp1" maxlength="1" pattern="[0-9]" required autofocus autocomplete="off" id = "box1">
+  <input class="otp-input" type="text" name="otp2" maxlength="1" pattern="[0-9]" required autocomplete="off" id = "box2">
+  <input class="otp-input" type="text" name="otp3" maxlength="1" pattern="[0-9]" required autocomplete="off" id = "box3">
+  <input class="otp-input" type="text" name="otp4" maxlength="1" pattern="[0-9]" required autocomplete="off" id = "box4">
+  <input class="otp-input" type="text" name="otp5" maxlength="1" pattern="[0-9]" required autocomplete="off" id = "box5">
+  <input class="otp-input" type="text" name="otp6" maxlength="1" pattern="[0-9]" required autocomplete="off" id = "box6">
+  <input class="otp-input" type="text" name="otp7" maxlength="1" pattern="[0-9]" required autocomplete="off" id = "box7">
+  <input class="otp-input" type="text" name="otp8" maxlength="1" pattern="[0-9]" required autocomplete="off" id = "box8">
+</div>
+<button id = "verify-btn">Verify OTP</button>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+
+$('#verify-btn').on('click', function() {
+            verifyOTP();
+        });
+		
+		
+		 function verifyOTP()
+  {
+      var URL = location.protocol + '//' + location.host;
+
+        var url = URL + "/verifyOTP";
+  const data = [
+    document.getElementById('box1').value,
+    document.getElementById('box2').value,
+    document.getElementById('box3').value,
+    document.getElementById('box4').value,
+    document.getElementById('box5').value,
+    document.getElementById('box6').value,
+    document.getElementById('box7').value,
+    document.getElementById('box8').value
+];
+
+   $.ajax({
+            type: 'POST',
+            url: url,
+			contentType: 'application/json', 
+			data: JSON.stringify(data),
+			success: function(data) {
+				if (data === 'success') {
+            // Redirect to the login page
+            window.location.href = '/login';
+        } else {
+          $('#otp').text(data);
+
+
+                console.log(data);
+				}
+            },
+            error: function(xhr, status, error) {
+                console.error("Error deleting patient:", error);
+                // Handle error here (e.g., display error message to the user)
+            }
+        });
+  
+  }
+
+
+		
+		</script>
+
+</body>
+</html>
